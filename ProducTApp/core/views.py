@@ -26,7 +26,7 @@ class OrderViewSet(ModelViewSet):
     @action(methods=["GET"], detail=False)
     def gethistory(self, request, *args, **kwargs):
         months = int(request.query_params["months"])
-        serializer =ProductSerializer(Order.objects.filter(
+        serializer =OrderSerializer(Order.objects.filter(
             created_date__gte=datetime.today() - relativedelta.relativedelta(
                 months=months)), many=True)
         return Response(serializer.data)
